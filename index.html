@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sundae | Login</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Header fijo (por encima del modal) -->
+  <header>
+    <h2 class="logo">Sundae</h2>
+    <nav class="navigation">
+      <a href="#">Home</a>
+      <a href="#">About</a>
+
+      <!-- Services con ID para el JS -->
+      <a href="#" id="nav-services">Services</a>
+
+      <!-- Botón de sonido (oculto al inicio) -->
+      <button id="sound-btn" class="sound-btn" aria-label="Sound" title="Sound" hidden>
+        <ion-icon name="volume-high"></ion-icon>
+      </button>
+
+      <a href="#">Contact</a>
+      <button class="btnLogin-popup">Login</button>
+    </nav>
+  </header>
+
+  <!-- Fondo oscuro -->
+  <div class="scrim"></div>
+
+  <!-- Modal abierto por defecto -->
+  <div class="auth open" aria-hidden="false">
+    <!-- Caja Login -->
+    <div class="card login">
+      <h2>Login</h2>
+      <form action="#">
+        <div class="input-box">
+          <span class="icon"><ion-icon name="mail"></ion-icon></span>
+          <input type="email" required placeholder=" " />
+          <label>Email</label>
+        </div>
+
+        <div class="input-box">
+          <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+          <input type="password" required placeholder=" " />
+          <label>Password</label>
+        </div>
+
+        <div class="remember-forgot">
+          <label><input type="checkbox" /> Remember me</label>
+          <a href="#">Forgot Password?</a>
+        </div>
+
+        <button type="submit" class="btn">Login</button>
+
+        <div class="Login-register">
+          <p>
+            Don't have an account?
+            <a href="#" class="register-link">Register</a>
+          </p>
+        </div>
+      </form>
+    </div>
+
+    <!-- Caja Register -->
+    <div class="card register">
+      <h2>Registration</h2>
+      <form action="#">
+        <div class="input-box">
+          <span class="icon"><ion-icon name="person"></ion-icon></span>
+          <input type="text" required placeholder=" " />
+          <label>Username</label>
+        </div>
+
+        <div class="input-box">
+          <span class="icon"><ion-icon name="mail"></ion-icon></span>
+          <input type="email" required placeholder=" " />
+          <label>Email</label>
+        </div>
+
+        <div class="input-box">
+          <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+          <input type="password" required placeholder=" " />
+          <label>Password</label>
+        </div>
+
+        <div class="remember-forgot">
+          <label><input type="checkbox" /> I agree to the terms & conditions</label>
+          <a href="#">Read terms</a>
+        </div>
+
+        <button type="submit" class="btn">Register</button>
+
+        <div class="Login-register">
+          <p>
+            Already have an account?
+            <a href="#" class="login-link">Login</a>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div id="offline-overlay" hidden>
+  <img src="offline.png" alt="Sin conexión">
+</div>
+
+  <!-- 🎵 Música de fondo (nombre EXACTO del archivo) -->
+  <audio id="bg-music" src="angeles-brawl.mp3.mp3" autoplay loop muted preload="auto" playsinline></audio>
+
+  <!-- Scripts -->
+  <script src="script.js" defer></script>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

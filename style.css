@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100..900&display=swap');
+
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
+
+body{
+  min-height:100vh;
+  background: url("noche_tranquila.jpg") center center fixed no-repeat;
+  background-size: cover;
+}
+
+/* ===== HEADER (encima del modal) ===== */
+header{
+  position:fixed; top:0; left:0;
+  width:100%; height:80px;
+  padding:0 100px;
+  background:transparent;
+  display:flex; align-items:center; justify-content:space-between;
+  z-index:120; /* por encima del modal */
+}
+.logo{ font-size:2rem; color:#fff; user-select:none; }
+.navigation{ display:flex; align-items:center; gap:40px; }
+.navigation a{ font-size:1.1rem; color:#fff; text-decoration:none; font-weight:500; }
+.navigation .btnLogin-popup{
+  width:130px; height:50px;
+  background:transparent; border:2px solid #fff; border-radius:6px;
+  cursor:pointer; font-size:1.1rem; color:#fff; font-weight:600;
+}
+.navigation .btnLogin-popup:hover{ background:#fff; color:#162938; }
+
+/* ===== SCRIM (debajo del header) ===== */
+.scrim {
+  position:fixed; inset:0;
+  background:rgba(0,0,0,.5);
+  opacity:0; pointer-events:none;
+  transition:opacity .3s ease;
+  z-index:100; /* debajo del header y modal */
+}
+.auth.open ~ .scrim { opacity:1; pointer-events:auto; }
+
+/* ===== MODAL (debajo del header para no bloquear clicks) ===== */
+.auth{
+  position:fixed; inset:0;
+  display:grid; place-items:center;
+  z-index:110; /* < header */
+  pointer-events:none; opacity:0;
+  transform:scale(.9);
+}
+.auth.open{
+  pointer-events:auto; opacity:1;
+  transform:scale(1);
+  animation: fadeInScale 0.5s ease forwards;
+}
+@keyframes fadeInScale { from { opacity:0; transform:scale(.9); } to { opacity:1; transform:scale(1); } }
+
+/* ===== CARD ===== */
+.card{
+  position:absolute;
+  width:400px;
+  padding:40px 32px;
+  background:rgba(255,255,255,0.12);
+  border:1px solid rgba(255,255,255,0.35);
+  border-radius:20px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
+  transition:transform .5s, opacity .5s;
+}
+.card h2{ font-size:2rem; text-align:center; margin-bottom:10px; color:#000; }
+
+/* LOGIN visible por defecto */
+.auth:not(.show-register) .card.login { opacity:1; transform:translateX(0); z-index:2; }
+.auth:not(.show-register) .card.register { opacity:0; transform:translateX(100%); z-index:1; }
+
+/* REGISTER visible */
+.auth.show-register .card.login { opacity:0; transform:translateX(-100%); z-index:1; }
+.auth.show-register .card.register { opacity:1; transform:translateX(0); z-index:2; }
+
+/* ===== INPUTS ===== */
+.input-box{ position:relative; width:100%; margin:22px 0; border-bottom:2px solid rgba(255,255,255,0.85); }
+.input-box .icon{ position:absolute; left:0; top:50%; transform:translateY(-50%); font-size:18px; color:#fff; width:24px; text-align:center; }
+.input-box input{
+  width:100%; height:44px; background:transparent; border:none; outline:none;
+  color:#fff; font-size:16px; padding:0 8px 0 32px;
+}
+.input-box label{
+  position:absolute; left:32px; top:50%; transform:translateY(-50%);
+  color:rgba(255,255,255,0.9); transition:.15s ease;
+}
+.input-box input:focus ~ label,
+.input-box input:not(:placeholder-shown) ~ label{ top:-8px; left:0; font-size:12px; color:#fff; }
+
+/* ===== Remember / Forgot ===== */
+.remember-forgot{ display:flex; justify-content:space-between; margin:12px 0 18px; font-size:.95rem; color:#000; }
+.remember-forgot a{ color:#000; text-decoration:underline; }
+
+/* ===== Botón ===== */
+.btn{
+  width:100%; height:46px; border:none; border-radius:8px;
+  background:#111; color:#fff; font-size:1rem; font-weight:700; cursor:pointer;
+}
+.btn:hover{ filter:brightness(1.1); }
+
+/* ===== Pie ===== */
+.Login-register{ margin-top:16px; text-align:center; font-size:.95rem; color:#000; }
+.Login-register a{ color:#000; text-decoration:underline; }
+
+/* ===== Responsive ===== */
+@media (max-width:480px){
+  header{ padding:0 16px; }
+  .card{ width:92%; padding:28px 20px; }
+}
+
+/* ===== Animación header ===== */
+.navigation a, .navigation .btnLogin-popup {
+  opacity: 0; transform: translateY(-20px); animation: fadeInDown 0.8s ease forwards;
+}
+.navigation a:nth-child(1){ animation-delay:.2s; }
+.navigation a:nth-child(2){ animation-delay:.4s; }
+.navigation a:nth-child(3){ animation-delay:.6s; }
+.navigation a:nth-child(4){ animation-delay:.8s; }
+.navigation .btnLogin-popup{ animation-delay:1s; }
+
+.navigation a{ position:relative; padding-bottom:4px; }
+.navigation a::after{
+  content:''; position:absolute; left:0; bottom:-6px; width:100%; height:3px; background:#fff; border-radius:5px;
+  transform-origin:right; transform:scaleX(0); transition:transform .4s;
+}
+.navigation a:hover::after{ transform-origin:left; transform:scaleX(1); }
+
+/* ===== Botón de sonido ===== */
+.sound-btn{
+  background: transparent; border: 0; color: #fff;
+  width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 8px; margin-left: 6px; cursor: pointer; transform: translateY(2px);
+  transition: background .2s ease, transform .06s ease; font-size: 20px;
+}
+.sound-btn:hover{ background: rgba(255,255,255,.15); }
+.sound-btn:active{ transform: translateY(3px); }
+.sound-btn[hidden]{ display:none; }
+
+/* ===== Pantalla sin conexión ===== */
+#offline-overlay{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .4s ease;
+}
+
+#offline-overlay.show{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#offline-overlay img{
+  max-width: 70%;
+  height: auto;
+}
+
+@keyframes fadeInDown { to { opacity:1; transform:translateY(0); } }
